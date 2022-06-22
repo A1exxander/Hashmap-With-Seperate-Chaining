@@ -17,20 +17,16 @@ private:
     int capacity{};
 public: 
 
-    Hashmap() : SIZE{ 10 }, map { new Node* [SIZE] }, capacity{ 0 } {
-    
-        for (auto i{ 0 }; i < SIZE; ++i) {
+    Hashmap() : SIZE{ 10 }, map { new Node* [SIZE] }, capacity{ 0 } {   
         
+        for (auto i{ 0 }; i < SIZE; ++i) {     
             map[i] = nullptr;
-
         }
 
     }
 
-    ~Hashmap() {
-    
-        delete[] map;
-    
+    ~Hashmap(){
+        delete[] map;   
     }
 
     std::string getKey() const {
@@ -72,8 +68,7 @@ public:
 
     }
 
-    int getClosestPrime(int num){
-    
+    int getClosestPrime(int num){    
         while (!isPrime(num)) {    
             ++num;
         }
@@ -134,35 +129,27 @@ public:
 
     void put(const std::string& key, int data) {
 
-        if (contains(key)) {
-        
+        if (contains(key)) {     
             return;
-
         }
 
         Node* node{ createNode(key, data) };
 
-        if (capacity / SIZE > 0.75) {
-        
+        if (capacity / SIZE > 0.75) {     
             resizeMap(SIZE * 2);
-
         }
 
         int address{ hash(key) };
 
         if (map[address] == nullptr) {
-        
             map[address] = node;
-
         }
         else {
         
             Node* current{ map[address] };
 
             while (current->nextPtr != nullptr && current->data != node->data) {
-
                 current = current->nextPtr;
-
             }
 
             if (current->nextPtr == nullptr) {
@@ -180,21 +167,15 @@ public:
     void remove(const std::string& key) {
     
         int address{ hash(key) };
-
         Node* current{ map[address] };
 
-        while (current != nullptr && current->key != key) {
-        
+        while (current != nullptr && current->key != key) {     
            current = current->nextPtr;
-
         }
-        if (current == nullptr) {
-        
+        if (current == nullptr) {       
             std::cout << "\nNo key with value of " << key << " in our hashmap!\n";
-
         }
-        else { // We found the correct node containing our data
-        
+        else { // We found the correct node containing our data   
             Node* temp{ current->nextPtr }; // store currents location, so you can delete the data it and then move
             delete current;
             current = temp;
@@ -204,51 +185,33 @@ public:
 
     bool contains(const std::string& key) const {
 
-        int address{ hash(key) };
-    
+        int address{ hash(key) };   
         if (map[address] == nullptr) {
-
             return false;
-
         }
         else if (map[address] != nullptr) {
-
             Node* current{ map[address] };
-
             while (current != nullptr && current->key != key) {
-
                 current = current->nextPtr;
-
             }
 
             if (current != nullptr && current->key == key) {
-
                 return true;
-
             }
-
             else {
-            
                 return false;
-
             }
-
-        }
-
-       
+        }   
     }
 
     int hash(std::string key)  const {
 
         int address{0};
-
-        for (auto i{ 0 }; i < key.size(); ++i) {
-        
+        for (auto i{ 0 }; i < key.size(); ++i) {        
             address += static_cast<int>(key[i]);
-
-        }
+        }    
         
-        return address % SIZE;
+        return address % SIZE;   
         
     }
 
@@ -269,7 +232,6 @@ int main(){
 
     while (repeat == true) {
         switch (hm.menu()) {
-
         case 1:
             hm.addNode();
             break;
