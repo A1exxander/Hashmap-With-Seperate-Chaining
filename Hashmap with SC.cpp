@@ -265,7 +265,6 @@ public:
 
 int main(){
     Hashmap<int> hm;
-
     bool repeat{ true };
 
     while (repeat == true) {
